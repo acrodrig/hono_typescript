@@ -23,25 +23,24 @@ export const transpiler = (): MiddlewareHandler => {
 
     // If it is in the cache, use that, otherwise transpile and put in the cache
     if (cache.has(ts)) {
-      c.res = new Response(cache.get(ts), {headers});
+      c.res = new Response(cache.get(ts), { headers });
     } else {
       // Declare a random name for the specifier
       try {
-        const root ="file:///" + crypto.randomUUID() + ".ts";
+        const root = "file:///" + crypto.randomUUID() + ".ts";
         const result = await transpile(root, {
           load(specifier: string) {
             const content = specifier === root ? ts : "";
             return Promise.resolve({ kind: "module", specifier, content });
-          }
+          },
         });
         c.res = new Response(result.get(root), { headers });
-      }
-      catch (ex) {
+      } catch (ex) {
         console.warn("Error transpiling " + url.pathname + ": " + ex.message);
 
         // Send original response (with the right JS content type, things will break in the browser)
         c.res = new Response(ts, { status: 500, headers });
       }
     }
-  }
-}
+  };
+};
