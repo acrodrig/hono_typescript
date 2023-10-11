@@ -31,6 +31,23 @@ app.use("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
 app.get("/", (c) => c.text("This is Home! You can access: /static/hello.txt"));
 ```
 
+## Tasks
+
+### Testing
+
+```bash
+deno test -A
+```
+
+### Checking
+
+```bash
+deno check *.ts && deno lint && deno fmt --check --line-width 160
+```
+
+Note: having 80 characters per line is an unfortunate anachronism.
+
+
 ## Notes
 
 - The middleware will only transpile files that end in `.ts` or `.tsx`
