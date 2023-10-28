@@ -1,5 +1,5 @@
 import { transpile } from "https://deno.land/x/emit@0.29.0/mod.ts";
-import { Context, MiddlewareHandler, Next } from "https://deno.land/x/hono@v3.7.5/mod.ts";
+import { MiddlewareHandler } from "https://deno.land/x/hono@v3.9.0/mod.ts";
 
 // Cache that maps from code itself to transpiled code (since this is to be
 // used in development only, no need to cap the cache size)
@@ -7,7 +7,7 @@ const cache = new Map<string, string>();
 
 // Typescript middleware
 export const transpiler = (): MiddlewareHandler => {
-  return async (c: Context, next: Next) => {
+  return async (c, next) => {
     // Transpiling needs to go at the end
     await next();
 

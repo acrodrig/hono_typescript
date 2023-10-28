@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno test -A --no-check
 
-import { Context, Hono } from "https://deno.land/x/hono@v3.7.5/mod.ts";
+import { Context, Hono } from "https://deno.land/x/hono@v3.9.0/mod.ts";
 import { assertEquals, assertExists } from "https://deno.land/std@0.203.0/assert/mod.ts";
 import { transpiler } from "./transpiler.ts";
 
